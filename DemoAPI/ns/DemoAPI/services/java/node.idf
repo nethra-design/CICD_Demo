@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">DemoAPI.services.java</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared">Ly9Vc2VkIGJ5ICJtdWx0aUNvbmNhdCIKCXByaXZhdGUgc3RhdGljIFN0cmluZyBjaGVja051bGwo
+U3RyaW5nIGlucHV0U3RyaW5nKQoJewoJCWlmKCBpbnB1dFN0cmluZyA9PSBudWxsICkKCQkJcmV0
+dXJuICIiOwoJCWVsc2UKCQkJcmV0dXJuIGlucHV0U3RyaW5nOwoJfQoJCgpwdWJsaWMgc3RhdGlj
+IGJvb2xlYW4gaXNOdWxsT3JCbGFuayhTdHJpbmcgcykgewoJaWYgKHM9PW51bGwgfHwgcy50cmlt
+KCkubGVuZ3RoKCk9PTApCgkJcmV0dXJuIHRydWU7CglyZXR1cm4gZmFsc2U7Cn0KcHVibGljIHN0
+YXRpYyBTdHJpbmdbXSBzcGxpdEJ5TnVtYmVyKFN0cmluZyBzdHIsIGludCBzaXplKSB7CiAgICBy
+ZXR1cm4gKHNpemU8MSB8fCBzdHI9PW51bGwpID8gbnVsbCA6IHN0ci5zcGxpdCgiKD88PVxcRy57
+IitzaXplKyJ9KSIpOwp9</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.sql.Date</value>
+    <value>java.text.ParseException</value>
+    <value>java.text.SimpleDateFormat</value>
+    <value>java.io.StringBufferInputStream</value>
+    <value>java.lang.*</value>
+  </array>
+</Values>
