@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<businessProcessDiagram xmlns="http://www.webmethods.com/bpm/2006/"
+  Id="6fb87aec-117f-4fd3-822a-08c75d374860" bpmnStyle="false" build="1"
+  canvasPool="1" creator="jasmeen_k" description=""
+  failProcessOnStepFailure="false" focalRole="Focal role"
+  name="ShipmentHandlingProcess"
+  packageName="DCVS3_BPM_Shipment_Processes" processCategory=""
+  rnSync="false" runtimeVersion="2" transitionLabelPref="expression"
+  unSynchJoinDeadPath="true" version="10.2.0">
+  <kpiDimensions/>
+  <systemKPIs>
+    <systemKPI Id="" description="" name="Volume" unitOfMeasure=""/>
+    <systemKPI Id="" description="" name="Cycle Time" unitOfMeasure=""/>
+    <systemKPI Id="" description="" name="Error Count" unitOfMeasure=""/>
+  </systemKPIs>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ProcessData" name="{ProcessNamespace}ProcessData" type="{pub.prt}ProcessData"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ValidationResults" name="{ProcessNamespace}ValidationResults" type="{dcvs3.process.shipmentValidation.docs}ValidationResults"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="StartShipmentEvent"
+    name="{ProcessNamespace}StartShipmentEvent" type="{dcvs3.process.shipmentHandling.docs}StartShipmentEvent"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ValidationsRequired"
+    name="{ProcessNamespace}ValidationsRequired" type="{dcvs3.process.shipmentValidation.docs}ValidationsRequired"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="StartValidationEvent"
+    name="{ProcessNamespace}StartValidationEvent" type="{dcvs3.process.shipmentValidation.docs}StartValidationEvent"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="PerformManualReviewInputEnv"
+    name="{ProcessNamespace}PerformManualReviewInputEnv" type="{pub.task}TaskQueueInfo"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="PerformManualReviewOutputEnv"
+    name="{ProcessNamespace}PerformManualReviewOutputEnv" type="{pub.task}TaskCompletionInfo"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ValidateShipmentInputEnv"
+    name="{ProcessNamespace}ValidateShipmentInputEnv" type="{pub.task}TaskQueueInfo"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ValidateShipmentOutputEnv"
+    name="{ProcessNamespace}ValidateShipmentOutputEnv" type="{pub.task}TaskCompletionInfo"/>
+  <logicalDataItem Id="" description="" dimension="0" label="debug"
+    name="{ProcessNamespace}debug" type="{http://webmethods.com/bpm/ISType/2006}string"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="updateShipmentState"
+    name="{ProcessNamespace}updateShipmentState" type="{http://webmethods.com/bpm/ISType/2006}string"/>
+  <logicalDataItem Id="ebe89df9-0c98-42ce-adc3-8a9736d0e3c5"
+    description="" dimension="0" label="isActive"
+    name="{ProcessNamespace}isActive" type="{http://webmethods.com/bpm/ISType/2006}string"/>
+  <logicalDataItem Id="" description="" dimension="0"
+    label="ValidateClassUnclassOutput"
+    name="{ProcessNamespace}ValidateClassUnclassOutput" type="{dcvs3.validateClassUnclass.docs}ValidateClassUnclassOutput"/>
+  <timeout calendarAlias="" calendarTime="0:0:0"
+    dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+    dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+    dynamicFieldName="" isCalendarTimeout="false" isStaticTimeout="true"
+    isXPathTimeout="false" pipelineCalendarAlias=""
+    pipelineCalendarDays="" pipelineCalendarHours=""
+    pipelineCalendarMinutes="" timeoutStyle="RELATIVE"
+    timeoutType="processTimeout" timeoutValue="0" xpathTimeoutValue=""/>
+  <pool Id="7b4af6e1-990f-4b77-9740-e497fc202522" blue="128"
+    containerType="LEGACY_WEBM_SUBPROCESS" external="true"
+    externalizeConditions="false" green="128" isCollapsed="false"
+    isCompensating="false" isTestAfter="false" label="Pool"
+    labelBlue="255" labelGreen="204" labelRed="153" logicalServer=""
+    loopMaximum="0" loopMaximumField="" name="1"
+    orientation="horizontal" red="128" retryCount="0" stepLock="false"
+    uid="P2" useCorrelation="false">
+    <documentation/>
+    <businessKPIs/>
+    <fontData boldFont="false" fontFamily="" italicFont="false"/>
+    <poolReference Id="c1c98ab7-f518-4575-b7d7-bda8b8385193"
+      label="ProcessShipmentHandling" logicalServer="ExpressESB"
+      poolName="5" stepLock="false" uid="S7" useCorrelation="false"
+      x="62" y="31">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="" italicFont="false"/>
+    </poolReference>
+    <timeout calendarAlias="" calendarTime="0:0:0"
+      dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+      dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+      dynamicFieldName="" isCalendarTimeout="false"
+      isStaticTimeout="true" isXPathTimeout="false"
+      pipelineCalendarAlias="" pipelineCalendarDays=""
+      pipelineCalendarHours="" pipelineCalendarMinutes=""
+      timeoutStyle="RELATIVE" timeoutType="stepTimeout" timeoutValue="0" xpathTimeoutValue=""/>
+    <wmExpression/>
+  </pool>
+  <pool Id="6440d98b-de0b-4900-ae65-488b00435767" blue="128"
+    containerType="LEGACY_WEBM_SUBPROCESS" errorHandler="S17"
+    external="false" externalizeConditions="false" green="128"
+    isCollapsed="false" isCompensating="false" isTestAfter="false"
+    label="ProcessShipmentHandling" labelBlue="255" labelGreen="204"
+    labelRed="153" logicalServer="" loopMaximum="0" loopMaximumField=""
+    name="5" orientation="horizontal" red="128" retryCount="0"
+    stepLock="false" uid="P6" useCorrelation="false">
+    <documentation/>
+    <businessKPIs/>
+    <fontData boldFont="false" fontFamily="" italicFont="false"/>
+    <gatewayStep Id="a0e90dc4-ecf5-4c3b-9a94-d99f3aa95bbd"
+      externalizeConditions="false" gatewayType="EXCLUSIVE" height="35"
+      label="IsTaskRequired" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" retryCount="0" stepLock="false" uid="S8"
+      useCorrelation="false" width="35" x="265" y="323">
+      <documentation>
+        <property name="Input Data" value="ValidationResults&#xd;&#xa;ValidationsRequired&#xd;&#xa;StartShipmentEvent&#xd;&#xa;"/>
+        <property name="Output Data" value="ValidationResults&#xd;&#xa;ValidationsRequired&#xd;&#xa;StartShipmentEvent"/>
+      </documentation>
+      <join joinType="UnsynchronizedOr" suppressJoinFailure="true" synchronizationPoint="false"/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}ValidationResults"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <input name="{ProcessNamespace}ValidationsRequired"/>
+      <output name="{ProcessNamespace}ValidationResults"/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <output name="{ProcessNamespace}ValidationsRequired"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+      <loggedField fieldAlias="TaskSetupCriteria/accountNumber"
+        fieldPath="TaskSetupCriteria/accountNumber"
+        logicalDataItem="{ProcessNamespace}ValidationResults" mode="OUTPUT"/>
+    </gatewayStep>
+    <gatewayStep Id="4ef8c09f-8d2c-47bb-a8be-f4cda238b623"
+      externalizeConditions="false" gatewayType="EXCLUSIVE" height="35"
+      label="CheckShipmentComplete" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" retryCount="0" stepLock="false" uid="S9"
+      useCorrelation="false" width="35" x="942" y="50">
+      <documentation>
+        <property name="Input Data" value="StartShipmentEvent"/>
+        <property name="Output Data" value="StartShipmentEvent"/>
+      </documentation>
+      <join joinType="UnsynchronizedOr" suppressJoinFailure="true" synchronizationPoint="false"/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </gatewayStep>
+    <errorEventStep Id="1869969f-429b-4ce0-a78c-8e302dc542e0"
+      eventType="END" height="35" isCompensating="false"
+      label="ShipmentProcessError" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" stepLock="false" uid="S11"
+      useCorrelation="false" width="35" x="237" y="668">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+    </errorEventStep>
+    <terminateStep Id="05d27f17-46ae-47dc-9a78-37975ed14650"
+      escalateFailure="true" height="35" label="End" labelHeight="-1"
+      labelWidth="-1" logicalServer="BPMESB" stepLock="false"
+      terminateStatus="DONE" uid="S12" useCorrelation="false" width="35"
+      x="1034" y="50">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+    </terminateStep>
+    <receiveStep Id="f708f4d9-8a75-4726-8262-f4e9919cabee"
+      allowsSynchronousReply="false" edaEventQName="" edaSubFilter=""
+      edaSubFilterLang="" eventType="START"
+      externalizeConditions="false" height="35"
+      isStartStepServiceRequired="true"
+      jmsAliasConnection="PE_NONTRANSACTIONAL_ALIAS"
+      jmsDestination="DCVS3_BPM_Shipment_Processes_ShipmentHandlingProcess_SUBQUEUE"
+      jmsDestinationType="" label="StartShipmentEvent" labelHeight="-1"
+      labelWidth="-1" logicalServer="BPMESB"
+      outputMessageType="{dcvs3.process.shipmentHandling.docs}StartShipmentEvent"
+      receiveProtocol="JMS" receiveType="EMPTY" stepLock="false"
+      uid="S13" useCorrelation="false" width="35" x="60" y="50">
+      <documentation>
+        <property name="Process" value="ShipmentHandling&#xd;&#xa;"/>
+        <property name="Activity" value="StartShipmentEvent&#xd;&#xa;"/>
+        <property name="Role(s)" value="BPM&#xd;&#xa;"/>
+        <property name="Activity Description" value="The System subscribes to TOPIC to fetch SD based on the SD CM ( Canonical Model) or Event details based on the Event CM. DMG receives a GNS521 flat file from ecom and converts it into the SD canonical model. DMG then places these messages into TOPIC from where BPM can subscribe for these messages.&#xd;&#xa;"/>
+        <property name="Precondition" value="BPM is able to subscribe to TOPIC&#xd;&#xa;"/>
+        <property name="Post condition" value="Data is saved in GNS&#xd;&#xa;"/>
+        <property name="Input Data" value="NA"/>
+        <property name="Output Data" value="StartShipmentEvent"/>
+      </documentation>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <wmExpressionFilter/>
+    </receiveStep>
+    <errorEventStep Id="47dff1ac-d6a8-4885-abb3-221c9dd535d6"
+      eventType="INTERMEDIATE_BOUNDARY_INTERRUPTING" height="27"
+      isCompensating="false" label="Error" labelHeight="-1"
+      labelWidth="-1" logicalServer="BPMESB" stepLock="false" uid="S10"
+      useCorrelation="false" width="27" x="130" y="690">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+    </errorEventStep>
+    <gatewayStep Id="3245113d-2f3c-45d9-b952-790feb2cf33f"
+      externalizeConditions="false" gatewayType="EXCLUSIVE" height="35"
+      label="ClassificationDone?" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" retryCount="0" stepLock="false" uid="S204"
+      useCorrelation="false" width="35" x="743" y="194">
+      <documentation/>
+      <join joinType="UnsynchronizedOr" suppressJoinFailure="false" synchronizationPoint="false"/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </gatewayStep>
+    <invokeStep Id="0b5e1529-075c-41e4-9c33-fc605abd948c"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:setupValidateTask"
+      invokeLocation="dcvs3.process.shipmentHandling.pub:setupValidateTask"
+      invokeName="setupValidateTask" invokeType="ISSERVICE"
+      isCompensating="false" isTestAfter="false"
+      label="SetupValidateTask" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" loopMaximum="0" loopMaximumField=""
+      retryCount="0" routingRuleSet="" ruleType="WMRULE"
+      stepLock="false" uid="S15" useCorrelation="false" width="83"
+      x="299" y="378">
+      <documentation>
+        <property name="Process" value="ShipmentHandling&#xd;&#xa;"/>
+        <property name="Activity" value="SetUpValidateTask&#xd;&#xa;"/>
+        <property name="Activity Description" value="A task is created for the users. The tasks are assigned to queues and prioritized as per the weights computed on the basis of the sorting criteria&#xd;&#xa;"/>
+        <property name="Precondition" value="Assignment Criteria and Sorting Criteria have been pre-defined by the Admin.&#xd;&#xa;"/>
+        <property name="Input Data" value="ValidationResults&#xd;&#xa;StartShipmentEvent"/>
+        <property name="Output Data" value="StartShipmentEvent"/>
+        <property name="Business Rule(s)" value="1) Assignment Criteria for Data Entry are&#xd;&#xa;a) Account Number&#xd;&#xa;b) Destination Country&#xd;&#xa;c) Destination Service Area&#xd;&#xa;d) Data Source&#xd;&#xa;e) Origin Service Area&#xd;&#xa;f) Origin Facility&#xd;&#xa;g) PCC&#xd;&#xa;h) Shipment Value&#xd;&#xa;&#xd;&#xa;2) Assignment criteria for Exception Handling are&#xd;&#xa;a) Exceptions/Validations&#xd;&#xa;b) Origin Service Area&#xd;&#xa;c) Origin Facility&#xd;&#xa;d) PCC&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;4) One User Group defined in LDAP can be associated with only one queue in BPM&#xd;&#xa;5) Admin can associate queues with only those User Groups to which he has access defined in LDAP&#xd;&#xa;6) When a Queue for BPM is being configured, the Cut Off Time for the queue should also be captured &#xd;&#xa;7) Sorting criteria is applied at Country Level&#xd;&#xa;&#xd;&#xa;8) The Set of Sorting Criteria are&#xd;&#xa;a) Account Number&#xd;&#xa;b) Destination Country&#xd;&#xa;c) Destination Service Area&#xd;&#xa;d) Exceptions/Validation&#xd;&#xa;e) Origin Service Area&#xd;&#xa;f) Origin Facility&#xd;&#xa;g) PCC&#xd;&#xa;h) Shipment Value&#xd;&#xa;i) Customer Declaration Cut Off Time&#xd;&#xa;j) Data Source&#xd;&#xa;k) Movement Cut Off&#xd;&#xa;l) Service Code&#xd;&#xa;m) Shipment Bagging status&#xd;&#xa;&#xd;&#xa;9) The Assignment criteria and the Sorting criteria are defined via the Admin Setup screens on the DCVS UI. The user can modify the assignment criteria configured for a queue or modify the sorting criteria through the UI while being completely un-mindful of the implementation.&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;"/>
+      </documentation>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}ValidationResults"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="2844f3b6-764e-4e22-85c9-5a43a526e511"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:setupReviewTask"
+      invokeLocation="" invokeName="setupReviewTask"
+      invokeType="ISSERVICE" isCompensating="false" isTestAfter="false"
+      label="SetupManualReviewTask" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" loopMaximum="0" loopMaximumField=""
+      retryCount="0" routingRuleSet="" ruleType="WMRULE"
+      stepLock="false" uid="S16" useCorrelation="false" width="83"
+      x="684" y="471">
+      <documentation>
+        <property name="Activity" value="SetupManulReviewTask&#xd;&#xa;"/>
+        <property name="Activity Description" value="Based on the criteria configured for Manual Review, a complete and valid shipment is subjected to manual intervention. The corresponding user task is created in this step.&#xd;&#xa;"/>
+        <property name="Input Data" value="ValidationResults&#xd;&#xa;StartShipmentEvent"/>
+        <property name="Output Data" value="StartShipmentEvent"/>
+        <property name="Business Rule(s)" value="1) If Shipment Details are complete and Valid &#xd;&#xa;and&#xd;&#xa;SD satisfy the assignment criteria for Manaul Review&#xd;&#xa;THEN&#xd;&#xa;Create and Assign Manaul Review tasks&#xd;&#xa;&#xd;&#xa;2) Assignment criteria for Manual Review are&#xd;&#xa;a) Acount Number&#xd;&#xa;b) Destination Country&#xd;&#xa;c) Destination Service Area&#xd;&#xa;d) Data Source&#xd;&#xa;e) Origin Service Area&#xd;&#xa;f) Origin Facility&#xd;&#xa;g) PCC&#xd;&#xa;h) Service Code&#xd;&#xa;i) Shipment Value&#xd;&#xa;&#xd;&#xa;3) Manual Review criteria can be configured via the Admin Setup screens on the DCVS UI&#xd;&#xa;&#xd;&#xa;"/>
+      </documentation>
+      <join joinType="Or" suppressJoinFailure="false" synchronizationPoint="false"/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}ValidationResults"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="3b743581-1950-40f6-a473-8b04e75e07b6"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:shipmentErrorHandler"
+      invokeLocation="" invokeName="shipmentErrorHandler"
+      invokeType="ISSERVICE" isCompensating="false" isTestAfter="false"
+      label="ShipmentErrorHandler" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" loopMaximum="0" loopMaximumField=""
+      ornamentKey="32_error_stop_sign2.png" retryCount="0"
+      routingRuleSet="" ruleType="WMRULE" stepLock="false" uid="S17"
+      useCorrelation="false" width="83" x="60" y="650">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}ProcessData"/>
+      <wmExpression/>
+      <boundaryEvents eventId="S10"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="1e9c6db5-226f-4348-89aa-b892df557eec"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:setProcessData"
+      invokeLocation="dcvs3.process.shipmentHandling.pub:setProcessData"
+      invokeName="setProcessData" invokeType="ISSERVICE"
+      isCompensating="false" isTestAfter="false" label="SetProcessData"
+      labelHeight="-1" labelWidth="-1" logicalServer="BPMESB"
+      loopMaximum="0" loopMaximumField="" retryCount="0"
+      routingRuleSet="" ruleType="WMRULE" stepLock="false" uid="S19"
+      useCorrelation="false" width="83" x="130" y="41">
+      <documentation>
+        <property name="Process" value="ShipmentHandling&#xd;&#xa;"/>
+        <property name="Activity" value="SetProcessData&#xd;&#xa;"/>
+        <property name="Role(s)" value="BPM&#xd;&#xa;"/>
+        <property name="Activity Description" value="The SD derived from SD CM or Event CM are saved in GNS as the customer copy.&#xd;&#xa;"/>
+        <property name="Precondition" value="Incomplete or Invalid SD can be saved in GNS. Saving in GNS should not fail due to any xsd validation.&#xd;&#xa;"/>
+        <property name="Input Data" value="StartShipmentEvent&#xd;&#xa;ProcessData"/>
+        <property name="Output Data" value="StartValidationEvent&#xd;&#xa;ValidationsRequired"/>
+        <property name="Business Rule(s)" value="1) Given SD CM is received from TOPIC &#xd;&#xa;a)If SID already exists in GNS&#xd;&#xa; and &#xd;&#xa;the Origin Country in the SID existing in GNS is the same as the SID received via the SD CM&#xd;&#xa;and&#xd;&#xa;Shipment Status = Active in GNS&#xd;&#xa;THEN &#xd;&#xa;Duplicate Record &#xd;&#xa;&#xd;&#xa;b) If SID already exists in GNS&#xd;&#xa;and&#xd;&#xa;Status of Task corresponding to the SID is Assigned To&#xd;&#xa;and&#xd;&#xa;Piece Count in GNS is different from the Piece Count received in the SD CM&#xd;&#xa;THEN&#xd;&#xa;Add Piece Count and Inherit any intercept existing at the shipment level to the 'new' incoming piece level and Do not override SD except that related to the pieces and their count in GNS&#xd;&#xa;&#xd;&#xa;c)  If SID already exists in GNS&#xd;&#xa;and&#xd;&#xa;Status of Task corresponding to the SID is not = Assigned To&#xd;&#xa;and&#xd;&#xa;Piece Count in GNS is different from the Piece Count received in the SD CM&#xd;&#xa;THEN&#xd;&#xa;Add Piece Count and Inherit any intercept existing at the shipment level to the 'new' incoming piece level and  override SD  in GNS&#xd;&#xa;&#xd;&#xa;2) Given Event CM is received from TOPIC&#xd;&#xa;a)If Event Type is PU, CI, SA, PL &#xd;&#xa;Then &#xd;&#xa;Save data in GNS and Do Not create tasks&#xd;&#xa;&#xd;&#xa;b) If Event Type is IA &#xd;&#xa;and &#xd;&#xa;SD not present in GNS &#xd;&#xa;THEN&#xd;&#xa;Save data in GNS and create an Image based task by deriving Origin country and Product code from the IA data.&#xd;&#xa;&#xd;&#xa;c) If Event Type is IA &#xd;&#xa;and &#xd;&#xa;Image URL contains INV&#xd;&#xa;THEN&#xd;&#xa;Dutiable Product &#xd;&#xa;&#xd;&#xa;d) If Event Type is IA&#xd;&#xa;and &#xd;&#xa;Image URL contains AWB&#xd;&#xa;THEN&#xd;&#xa;Non Dutiable Product&#xd;&#xa;&#xd;&#xa;e) If Event Type is IA &#xd;&#xa;and &#xd;&#xa;Task corresponding to the SID already exists in Open or Assigned To state in BPM &#xd;&#xa;THEN &#xd;&#xa;No new task created&#xd;&#xa;"/>
+      </documentation>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <input name="{ProcessNamespace}ProcessData"/>
+      <input name="{ProcessNamespace}debug"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}StartValidationEvent"/>
+      <output name="{ProcessNamespace}ValidationsRequired"/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <output name="{ProcessNamespace}updateShipmentState"/>
+      <output name="{ProcessNamespace}isActive"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="64d99eda-7b18-4d18-a40d-d3bbb1b4bee8"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:performValidationsComposite"
+      invokeLocation="" invokeName="performValidationsComposite"
+      invokeType="ISSERVICE" isCompensating="false" isTestAfter="false"
+      label="PerformValidations" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" loopMaximum="0" loopMaximumField=""
+      retryCount="0" routingRuleSet="" ruleType="WMRULE"
+      stepLock="false" uid="S21" useCorrelation="false" width="83"
+      x="130" y="314">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}StartValidationEvent"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <input name="{ProcessNamespace}updateShipmentState"/>
+      <input name="{ProcessNamespace}ValidateClassUnclassOutput"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}ValidationResults"/>
+      <output name="{ProcessNamespace}StartValidationEvent"/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <output name="{ProcessNamespace}ValidationsRequired"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+      <loggedField fieldAlias="taskId" fieldPath="taskId"
+        logicalDataItem="{ProcessNamespace}ValidationResults" mode="OUTPUT"/>
+      <loggedField fieldAlias="ValidationResults" fieldPath=""
+        logicalDataItem="{ProcessNamespace}ValidationResults" mode="OUTPUT"/>
+      <loggedField fieldAlias="failedValidations"
+        fieldPath="failedValidations"
+        logicalDataItem="{ProcessNamespace}ValidationResults" mode="OUTPUT"/>
+      <loggedField fieldAlias="shipmentId" fieldPath="shipmentId"
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+      <loggedField fieldAlias="StartShipmentEvent" fieldPath=""
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+      <loggedField fieldAlias="eventType" fieldPath="eventType"
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+      <loggedField fieldAlias="sessionId" fieldPath="sessionId"
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+      <loggedField fieldAlias="gensisSource" fieldPath="gensisSource"
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+      <loggedField fieldAlias="srcUpdAppCd" fieldPath="srcUpdAppCd"
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+      <loggedField fieldAlias="screenName" fieldPath="screenName"
+        logicalDataItem="{ProcessNamespace}StartShipmentEvent" mode="OUTPUT"/>
+    </invokeStep>
+    <invokeStep Id="2957f242-2a60-4163-9996-1f006dca436f"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer=""
+      invokeId="42D67EEB-B5E1-859E-6EE5-255E295527AA" invokeLocation=""
+      invokeName="ValidateTask" invokeType="TASK" isCompensating="false"
+      isTestAfter="false" label="PerformManualReview" labelHeight="-1"
+      labelWidth="-1" logicalServer="BPMESB" loopMaximum="0"
+      loopMaximumField="" retryCount="0" routingRuleSet=""
+      ruleType="TASK" stepLock="false" uid="S23" useCorrelation="false"
+      width="83" x="852" y="471">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}PerformManualReviewInputEnv"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}PerformManualReviewOutputEnv"/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="7e9eeb1b-a4a3-4532-950f-c678c4c5db49"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer=""
+      invokeId="42D67EEB-B5E1-859E-6EE5-255E295527AA" invokeLocation=""
+      invokeName="ValidateTask" invokeType="TASK" isCompensating="false"
+      isTestAfter="false" label="ValidateShipment" labelHeight="-1"
+      labelWidth="-1" logicalServer="BPMESB" loopMaximum="0"
+      loopMaximumField="" retryCount="0" routingRuleSet=""
+      ruleType="TASK" stepLock="false" uid="S22" useCorrelation="false"
+      width="83" x="437" y="378">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}ValidateShipmentInputEnv"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}ValidateShipmentOutputEnv"/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="d85ff1e0-2e9a-40f5-b604-db68bc8d2410"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="53" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:performClassification"
+      invokeLocation="" invokeName="performClassification"
+      invokeType="ISSERVICE" isCompensating="false" isTestAfter="false"
+      label="PerformClassification" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" loopMaximum="0" loopMaximumField=""
+      retryCount="0" routingRuleSet="" ruleType="WMRULE"
+      stepLock="false" uid="S189" useCorrelation="false" width="86"
+      x="129" y="185">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}StartValidationEvent"/>
+      <input name="{ProcessNamespace}ValidationsRequired"/>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <input name="{ProcessNamespace}updateShipmentState"/>
+      <input name="{ProcessNamespace}isActive"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <output name="{ProcessNamespace}StartValidationEvent"/>
+      <output name="{ProcessNamespace}updateShipmentState"/>
+      <output name="{ProcessNamespace}ValidateClassUnclassOutput"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="b221d11a-1f7a-457b-9569-6f9264d4eb9e"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="60" invokeContainer="dcvs3.process.shipmentHandling.pub"
+      invokeId="dcvs3.process.shipmentHandling.pub:setupClassificationTask"
+      invokeLocation="dcvs3.process.shipmentHandling.pub:setupClassificationTask"
+      invokeName="setupClassificationTask" invokeType="ISSERVICE"
+      isCompensating="false" isTestAfter="false"
+      label="setupClassificationTask" labelHeight="-1" labelWidth="-1"
+      logicalServer="BPMESB" loopMaximum="0" loopMaximumField=""
+      retryCount="0" routingRuleSet="" ruleType="WMRULE"
+      stepLock="false" uid="S194" useCorrelation="false" width="93"
+      x="827" y="182">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <input name="{ProcessNamespace}StartValidationEvent"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <invokeStep Id="e9f399dd-0480-483f-847a-f9128d5f3e61"
+      dynamicReferenceProcess="false" externalizeConditions="false"
+      height="60" invokeContainer=""
+      invokeId="42D67EEB-B5E1-859E-6EE5-255E295527AA" invokeLocation=""
+      invokeName="ValidateTask" invokeType="TASK" isCompensating="false"
+      isTestAfter="false" label="classifyShipment" labelHeight="-1"
+      labelWidth="-1" logicalServer="BPMESB" loopMaximum="0"
+      loopMaximumField="" retryCount="0" routingRuleSet=""
+      ruleType="TASK" stepLock="false" uid="S195" useCorrelation="false"
+      width="93" x="1001" y="182">
+      <documentation/>
+      <businessKPIs/>
+      <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+        <fontColor blue="0" green="0" red="0"/>
+      </fontData>
+      <input name="{ProcessNamespace}StartShipmentEvent"/>
+      <wmExpression/>
+      <output name="{ProcessNamespace}StartShipmentEvent"/>
+      <extendedProperty name="retries" value="0"/>
+      <extendedProperty name="retryInterval" value="60000"/>
+      <timeout calendarAlias="" calendarTime="0:0:0"
+        dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+        dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+        dynamicFieldName="" isCalendarTimeout="false"
+        isStaticTimeout="true" isXPathTimeout="false"
+        pipelineCalendarAlias="" pipelineCalendarDays=""
+        pipelineCalendarHours="" pipelineCalendarMinutes=""
+        timeoutStyle="RELATIVE" timeoutType="stepTimeout"
+        timeoutValue="0" xpathTimeoutValue=""/>
+    </invokeStep>
+    <transition Id="e3388eb5-d512-4f7c-a387-e844ef8bbfde" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S13"
+      sourceLocation="-1,-1" sourceTerminal="RIGHT" target="S19"
+      targetLocation="-1,-1" targetTerminal="LEFT" uid="T136">
+      <bendpoint index="0" location="204,99" weight="0.5"/>
+      <bendpoint index="1" location="204,99" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="96caa39f-feff-4668-b8d4-1cc5b81140c3" blue="255"
+      conditionDescription=""
+      conditionText="StartShipmentEvent/isManualReviewRequired = true"
+      conditionType="IF" green="0" lineShape="STRAIGHT" red="0"
+      source="S16" sourceLocation="-1,-1" sourceTerminal="RIGHT"
+      target="S23" targetLocation="-1,-1" targetTerminal="LEFT" uid="T32">
+      <bendpoint index="0" location="900,529" weight="0.5"/>
+      <bendpoint index="1" location="900,529" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="15" red="255" width="279" x="739" y="514">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="" leftFieldPath="isManualReviewRequired"
+          leftOperand="{ProcessNamespace}StartShipmentEvent"
+          operator="=" rightOperand="'true'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="5dd30879-2b4a-4b23-bded-a593c81f8443" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S10"
+      sourceLocation="-1,-1" sourceTerminal="RIGHT" target="S11"
+      targetLocation="-1,-1" targetTerminal="LEFT" uid="T97">
+      <bendpoint index="0" location="288,735" weight="0.5"/>
+      <bendpoint index="1" location="288,717" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="524ab776-6da4-4a6d-9311-fb480a6f77a8" blue="255"
+      conditionDescription=""
+      conditionText="ValidationResults/isShipmentValid != true and&#xa;ValidationsRequired/isTaskRequired != false"
+      conditionType="IF" green="0" lineShape="STRAIGHT" red="0"
+      source="S8" sourceLocation="-1,-1" sourceTerminal="BOTTOM"
+      target="S15" targetLocation="299,404" targetTerminal="LEFT" uid="T171">
+      <bendpoint index="0" location="374,436" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="30" red="255" width="239" x="137" y="434">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="and" leftFieldPath="isShipmentValid"
+          leftOperand="{ProcessNamespace}ValidationResults"
+          operator="!=" rightOperand="'true'"/>
+        <row chainOperator="" leftFieldPath="isTaskRequired"
+          leftOperand="{ProcessNamespace}ValidationsRequired"
+          operator="!=" rightOperand="'false'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="89d23440-fd1f-4c8a-ae90-2da461babcc1" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S9"
+      sourceLocation="-1,-1" sourceTerminal="RIGHT" target="S12"
+      targetLocation="-1,-1" targetTerminal="LEFT" uid="T172">
+      <bendpoint index="0" location="1096,99" weight="0.5"/>
+      <bendpoint index="1" location="1096,99" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="1a898605-5ffe-4f9c-820c-18daa6f32615" blue="255"
+      conditionDescription=""
+      conditionText="ValidationResults/isShipmentValid = true and&#xa;ValidationsRequired/isTaskRequired != false"
+      conditionType="IF" green="0" lineShape="STRAIGHT" red="0"
+      source="S8" sourceLocation="-1,-1" sourceTerminal="RIGHT"
+      target="S16" targetLocation="725,524" targetTerminal="BOTTOM" uid="T176">
+      <bendpoint index="0" location="604,372" weight="0.5"/>
+      <bendpoint index="1" location="604,566" weight="0.5"/>
+      <bendpoint index="2" location="817,566" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="30" red="255" width="238" x="498" y="340">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="and" leftFieldPath="isShipmentValid"
+          leftOperand="{ProcessNamespace}ValidationResults" operator="=" rightOperand="'true'"/>
+        <row chainOperator="" leftFieldPath="isTaskRequired"
+          leftOperand="{ProcessNamespace}ValidationsRequired"
+          operator="!=" rightOperand="'false'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="085da22e-8703-47ee-9cb5-113fd3af7b43" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S15"
+      sourceLocation="-1,-1" sourceTerminal="RIGHT" target="S22"
+      targetLocation="-1,-1" targetTerminal="LEFT" uid="T29">
+      <bendpoint index="0" location="500,436" weight="0.5"/>
+      <bendpoint index="1" location="500,436" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="-1" red="255" width="-1" x="0" y="110">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="b8797573-5e52-4178-9943-e9c56aebea92" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S21"
+      sourceLocation="-1,-1" sourceTerminal="RIGHT" target="S8"
+      targetLocation="-1,-1" targetTerminal="LEFT" uid="T182">
+      <bendpoint index="0" location="330,372" weight="0.5"/>
+      <bendpoint index="1" location="330,372" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="7783da0e-053c-450a-ae45-1850ac2e2b30" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S22"
+      sourceLocation="-1,-1" sourceTerminal="RIGHT" target="S16"
+      targetLocation="684,497" targetTerminal="LEFT" uid="T185">
+      <bendpoint index="0" location="694,436" weight="0.5"/>
+      <bendpoint index="1" location="694,529" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="-1" red="255" width="-1" x="0" y="110">
+        <fontData boldFont="false" fontFamily="Segoe UI" fontSize="9" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="986669e9-3005-469f-91ba-1e3f29f74c36" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S189"
+      sourceLocation="171,238" sourceTerminal="BOTTOM" target="S21"
+      targetLocation="171,314" targetTerminal="TOP" uid="T191">
+      <bendpoint index="0" location="263,308" weight="0.5"/>
+      <bendpoint index="1" location="263,308" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="ec0f7586-84f3-4038-8f63-b2e7b5355c6e" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S19"
+      sourceLocation="171,94" sourceTerminal="BOTTOM" target="S189"
+      targetLocation="172,185" targetTerminal="TOP" uid="T193">
+      <bendpoint index="0" location="264,126" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="6b7fc4aa-eaf1-44f7-a8c0-82b274e9b5ec" blue="255"
+      conditionDescription="" conditionText="Default"
+      conditionType="ELSE" green="0" lineShape="STRAIGHT" red="0"
+      source="S194" sourceLocation="873,182" sourceTerminal="TOP"
+      target="S9" targetLocation="942,67" targetTerminal="LEFT" uid="T199">
+      <bendpoint index="0" location="965,99" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="14" red="255" width="34" x="911" y="142">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="e64b4a52-b1e5-4c13-9d1d-92f0aa5ec4c0" blue="255"
+      conditionDescription=""
+      conditionText="StartShipmentEvent/isClassified != true"
+      conditionType="IF" green="0" lineShape="STRAIGHT" red="0"
+      source="S194" sourceLocation="920,212" sourceTerminal="RIGHT"
+      target="S195" targetLocation="1001,212" targetTerminal="LEFT" uid="T200">
+      <bendpoint index="0" location="1052,244" weight="0.5"/>
+      <bendpoint index="1" location="1052,244" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="-1" red="255" width="-1" x="974" y="230">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="" leftFieldPath="isClassified"
+          leftOperand="{ProcessNamespace}StartShipmentEvent"
+          operator="!=" rightOperand="'true'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="0a1bb7e5-ab5d-4238-8c73-4ed9d1d78f5d" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S195"
+      sourceLocation="1047,182" sourceTerminal="TOP" target="S9"
+      targetLocation="959,85" targetTerminal="BOTTOM" uid="T201">
+      <bendpoint index="0" location="1139,164" weight="0.5"/>
+      <bendpoint index="1" location="1051,164" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="2fd37cdc-385f-48a4-99d3-e270ae4509c3" blue="255"
+      conditionDescription=""
+      conditionText="ValidationsRequired/isTaskRequired = false"
+      conditionType="IF" green="0" lineShape="STRAIGHT" red="0"
+      source="S8" sourceLocation="-1,-1" sourceTerminal="TOP"
+      target="S204" targetLocation="760,194" targetTerminal="TOP" uid="T205">
+      <bendpoint index="0" location="374,216" weight="0.5"/>
+      <bendpoint index="1" location="852,216" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="14" red="255" width="210" x="491" y="193">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression>
+        <row chainOperator="" leftFieldPath="isTaskRequired"
+          leftOperand="{ProcessNamespace}ValidationsRequired"
+          operator="=" rightOperand="'false'"/>
+      </wmExpression>
+    </transition>
+    <transition Id="62dc9564-df67-40d9-84e7-a3c92060af45" blue="255"
+      conditionDescription="" conditionText="Default"
+      conditionType="ELSE" green="0" lineShape="STRAIGHT" red="0"
+      source="S16" sourceLocation="-1,-1" sourceTerminal="TOP"
+      target="S204" targetLocation="743,211" targetTerminal="LEFT" uid="T206">
+      <bendpoint index="0" location="817,243" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="false" green="196"
+        height="-1" red="255" width="-1" x="821" y="294">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="c5ac2941-3bca-47c1-9423-df2bcdf550e2" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S23"
+      sourceLocation="-1,-1" sourceTerminal="TOP" target="S204"
+      targetLocation="760,229" targetTerminal="BOTTOM" uid="T207">
+      <bendpoint index="0" location="985,382" weight="0.5"/>
+      <bendpoint index="1" location="852,382" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <transition Id="c1486874-506f-4b57-9f90-c226186e0bec" blue="255"
+      conditionDescription="" conditionText="" conditionType="IF"
+      green="0" lineShape="STRAIGHT" red="0" source="S204"
+      sourceLocation="778,211" sourceTerminal="RIGHT" target="S194"
+      targetLocation="827,212" targetTerminal="LEFT" uid="T208">
+      <bendpoint index="0" location="894,243" weight="0.5"/>
+      <bendpoint index="1" location="894,244" weight="0.5"/>
+      <labelLayout blue="0" defaultLocation="true" green="196"
+        height="-1" red="255" width="-1" x="-1" y="-1">
+        <fontData boldFont="false" fontFamily="Arial" fontSize="8" italicFont="false">
+          <fontColor blue="0" green="0" red="0"/>
+        </fontData>
+      </labelLayout>
+      <wmExpression/>
+    </transition>
+    <timeout calendarAlias="" calendarTime="0:0:0"
+      dynamicCalendarStaticAlias="" dynamicCalendarStaticDays=""
+      dynamicCalendarStaticHours="" dynamicCalendarStaticMinutes=""
+      dynamicFieldName="" isCalendarTimeout="false"
+      isStaticTimeout="true" isXPathTimeout="false"
+      pipelineCalendarAlias="" pipelineCalendarDays=""
+      pipelineCalendarHours="" pipelineCalendarMinutes=""
+      timeoutStyle="RELATIVE" timeoutType="stepTimeout" timeoutValue="0" xpathTimeoutValue=""/>
+    <wmExpression/>
+    <swimlane Id="0e7de087-0e01-482f-8c0e-ddc4d44a9d1a" blue="204"
+      green="255" height="142" label="BPM" labelBlue="255"
+      labelGreen="238" labelRed="221" name="BPM" red="255" uid="W6" width="1119">
+      <documentation/>
+    </swimlane>
+    <swimlane Id="0c7436dd-64a6-46ca-9d21-a100f2c75ebf" blue="204"
+      green="255" height="150" label="Classifier" labelBlue="255"
+      labelGreen="238" labelRed="221" name="Classifier" red="255"
+      uid="W188" width="1119">
+      <documentation/>
+    </swimlane>
+    <swimlane Id="38bd82d5-1914-4707-98b7-13f663124694" blue="204"
+      green="255" height="161" label="Validator" labelBlue="255"
+      labelGreen="238" labelRed="221" name="Validator" red="255"
+      uid="W7" width="1119">
+      <documentation/>
+    </swimlane>
+    <swimlane Id="9ce7a8be-80c0-421e-a0e4-8da04129e1f5" blue="204"
+      green="255" height="165" label="Reviewer" labelBlue="255"
+      labelGreen="238" labelRed="221" name="Reviewer" red="255" uid="W8" width="1119">
+      <documentation/>
+    </swimlane>
+    <swimlane Id="c45a6f25-b5e7-4fbf-9530-83bc5c782fc5" blue="204"
+      green="255" height="155" label="Error" labelBlue="255"
+      labelGreen="238" labelRed="221" name="Error" red="255" uid="W104" width="1119">
+      <documentation/>
+    </swimlane>
+  </pool>
+  <documentation/>
+  <qualityOfService expressPipeline="true" minLogLevel="3"
+    optimizeLocally="true" volatileTracking="false" volatileTransition="true"/>
+  <edaIntrinsics processEvent="false" stepEvent="false"/>
+  <easeOfOperations enableProcessForTrackingInTarget="false" enableProcessInTarget="true"/>
+</businessProcessDiagram>
