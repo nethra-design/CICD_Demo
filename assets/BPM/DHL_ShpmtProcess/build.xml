@@ -22,7 +22,7 @@
 	<!-- Do not modify -->
 	<property name="run.process.main.class.name"
 		value="com.softwareag.process.build.acdl.ProcessSolutionsAssembler" />
-	<taskdef classpath="${sag.master.build.dir}/master_build/lib/ant-contrib.jar"
+	<taskdef classpath="${sag.master.build.dir}/master_build/lib/ant-contrib-1.0.jar"
 		resource="net/sf/antcontrib/antlib.xml" />	
 	<!--Do not modify  -->	
 	
